@@ -23,15 +23,18 @@ void pedirDatos();
 void mostrarDatos();
 void showData(PERSONAS &c);
 void editarDatos();
+//Manejo de archivos
+int cargarPac();
+void escribirArchivo(const PERSONAS &person);
 
-// Agregar ciudada
+// Agregar paciente
 void agregar(PERSONAS *c)
 {
     pacientes[pos] = *c;
     pos++;
 }
 
-// Buscar ciudades de las cuales se ingresaron
+// Buscar pacientes de las cuales se ingresaron
 PERSONAS buscar(int id)
 {
     for (int i = 0; i < pos; i++)
@@ -45,8 +48,6 @@ PERSONAS buscar(int id)
     return c;
 }
 
-
-
 int obtPos(int id)
 {
     for (int i = 0; i < pos; i++)
@@ -59,10 +60,10 @@ int obtPos(int id)
     return -1;
 }
 
-// Editar información de una ciudad
+// Editar información del paciente
 void editar(PERSONAS *c, int id)
 {
-    //Se necesita mejora --------------------------------------------------------------------------
+    // Se necesita mejora --------------------------------------------------------------------------
     int posi = obtPos(id);
     strcpy(pacientes[posi].nombre, c->nombre);
     strcpy(pacientes[posi].apellido, c->apellido);
@@ -94,12 +95,12 @@ void eliminarDatos()
 {
     int id;
 
-    cout << "Dijita el id de el usuario a eliminar: " << endl;
+    cout << "Dijite el id de el usuario a eliminar: ";
     cin >> id;
 
     if (obtPos(id) == -1)
     {
-        cout << "No se encontro registro: " << endl;
+        cout << "No se encontro registro" << endl;
         return;
     }
 
@@ -113,6 +114,7 @@ int menu()
 {
     setlocale(LC_ALL, "spanish");
     int op;
+    cout << endl;
     cout << "Menu \n";
     cout << "1. Agregar\n";
     cout << "2. Editar \n";
@@ -120,7 +122,7 @@ int menu()
     cout << "4. Buscar \n";
     cout << "5. Mostrar Todo\n";
     cout << "6. Salir\n ";
-    cout << "Digite la opción ";
+    cout << "Digite la opcion: ";
     cin >> op;
     return op;
 }
@@ -128,6 +130,7 @@ int menu()
 // Principal
 void principal()
 {
+    pos = cargarPac();
     int op;
     do
     {
@@ -160,13 +163,14 @@ void principal()
     } while (op != 6);
 }
 
-//Mostrar
+// Mostrar
 void mostrarDatos()
 {
 
     if (pos == 0)
     {
-        cout << "No hay datos: " << endl;
+        cout << endl;
+        cout << "No hay datos" << endl;
         return;
     }
 
@@ -177,7 +181,7 @@ void mostrarDatos()
     }
 }
 
-//Buscar por ID
+// Buscar por ID
 void buscarID()
 {
     int id;
@@ -196,74 +200,67 @@ void buscarID()
     cout << "===========================";
 }
 
-//Mostrar datos
+// Mostrar datos
 void showData(PERSONAS &c)
 {
-    cout<< "DATOS DEL PACIENTE: "<<endl;
-    cout<< "=====================================================================" << endl;
-    cout << "El id del paciente es: "<< c.id << endl;
+    cout << "DATOS DEL PACIENTE: " << endl;
+    cout << "=====================================================================" << endl;
+    cout << "El id del paciente es: " << c.id << endl;
     cout << "El nombre del paciente es: " << c.nombre << endl;
-    cout << "El apellido del paciente es: "<< c.apellido << endl;
-    cout << "La edad del paciente es: "<<  c.edad << endl;
-    cout<<"Fecha de nacimiento: "<<endl;
-    cout << "El dia de naciemiento del pacinete es: "<< c.dia << endl;
-    cout << "El mes de nacimiento del paciente es: "<<  c.mes << endl;
-    cout << "El año de nacimiento del paciente es: "<<  c.anio << endl;
-    cout << "La cedula del paciente es: "<<  c.cedula << endl;
-    cout << "El género del paciente es: "<<  c.genero << endl;
-    cout << "La ciudad de residencia del paciente es: "<<  c.ciudad << endl;
-    cout << "La direccion del hogar del paciente es: "<< c.direccion << endl;
-    cout << "El telefono celular del paciente es: " << c.telefono  << endl;
-    cout << "El correo electrónico del paciente es: "<< c.correo << endl;
-    cout << "La relacion cibica del paciente actualmente es: "<<  c.relacion << endl;
-    cout<< "=====================================================================" << endl;
+    cout << "El apellido del paciente es: " << c.apellido << endl;
+    cout << "La edad del paciente es: " << c.edad << endl;
+    cout << endl;
+    cout << "Fecha de nacimiento" << endl;
+    cout << "Dia: " << c.dia << endl;
+    cout << "Mes: " << c.mes << endl;
+    cout << "Anio: " << c.anio << endl;
+    cout << endl;
+    cout << "La cedula del paciente es: " << c.cedula << endl;
+    cout << "El genero del paciente es: " << c.genero << endl;
+    cout << "La ciudad de residencia del paciente es: " << c.ciudad << endl;
+    cout << "La direccion del hogar del paciente es: " << c.direccion << endl;
+    cout << "El telefono celular del paciente es: " << c.telefono << endl;
+    cout << "El correo electronico del paciente es: " << c.correo << endl;
+    cout << "La relacion civica del paciente actualmente es: " << c.relacion << endl;
+    cout << "=====================================================================" << endl;
 }
 
 // Datos que tendrá cada ciudad que se quiera ingresar al registro
 void pedirDatos()
 {
-    PERSONAS paciente; 
+    PERSONAS paciente;
     cout << "Datos del paciente\n";
     cout << "ID: ";
     cin >> paciente.id;
     if (obtPos(paciente.id) != -1)
     {
-        cout << "El id ya está registrado: " << endl;
+        cout << "El id ya esta registrado: " << endl;
         return;
     }
-    cout << "NOMBRE: ";
+    cout << "Nombre: ";
     scanf(" %[^\n]", paciente.nombre);
     cout << "Apellido: ";
     scanf(" %[^\n]", paciente.apellido);
-    //cin.ignore();
-    cout << "Edad: " << endl;
+    cout << "Edad: ";
     cin >> paciente.edad;
-    //cin.ignore();
     cout << "Fecha de nacimiento" << endl;
-    cout << "Dia: " << endl;
+    cout << "Dia: ";
     cin >> paciente.dia;
-    //cin.ignore();
-    cout << "Mes: " << endl;
+    cout << "Mes: ";
     cin >> paciente.mes;
-    //cin.ignore();
-    cout << "Anio: " << endl;
+    cout << "Anio: ";
     cin >> paciente.anio;
-    //cin.ignore();
-    cout << "Cedula: " << endl;
+    cout << "Cedula: ";
     scanf(" %[^\n]", paciente.cedula);
-    //cin.ignore();
-    cout << "Genero: " << endl;
+    cout << "Genero: ";
     scanf(" %[^\n]", paciente.genero);
-    //cin.ignore();
-    /*cout << "¿Desea agregar genero secundario? (1=SI/2=N)" << endl;
+    /*cout << "¿Desea agregar genero secundario? (1-Si / 2-No)" << endl;
     cin >> opGenSec;
-    //cin.ignore();
 
     if (opGenSec == 1)
     {
         cout << "Genero secundario: " << endl;
         scanf(" %[^\n]", paciente.generoSec);
-        //cin.ignore();
     }
     else if (opGenSec == 2)
     {
@@ -274,37 +271,34 @@ void pedirDatos()
         cout << "Ninguna opcion es valida..." << endl;
         exit(0);
     }*/
-
-    cout << endl;
-    cout << "Ciudad: " << endl;
+    cout << "Ciudad: ";
     scanf(" %[^\n]", paciente.ciudad);
-    //cin.ignore();
-    cout << "Direccion: " << endl;
-   scanf(" %[^\n]", paciente.direccion);
-    //cin.ignore();
-    cout << "Telefono: " << endl;
+    cout << "Direccion: ";
+    scanf(" %[^\n]", paciente.direccion);
+    cout << "Telefono: ";
     scanf(" %[^\n]", paciente.telefono);
-    //cin.ignore();
-    cout << "Correo: " << endl;
+    cout << "Correo: ";
     scanf(" %[^\n]", paciente.correo);
-    //cin.ignore();
     cout << "Escriba la relacion que tiene el paciente actualmente: " << endl;
     cout << "1. Casado" << endl;
     cout << "2. Soltero" << endl;
     cout << "3. Divorciado" << endl;
     scanf(" %[^\n]", paciente.relacion);
-
-    //cin.ignore();
     cout << "El paciente ha sido registrado..." << endl;
     agregar(&paciente);
+
     cout << "Registro Agregado....\n";
+    escribirArchivo(paciente);
 }
 
-void editarDatos(){ // se necesita mejora
+void editarDatos()
+{
     int id;
+    int opE;
 
     cout << "Escribe el ID del paciente a editar: " << endl;
     cin >> id;
+    
     if (obtPos(id) == -1)
     {
         cout << "No se encontro registro: " << endl;
@@ -316,80 +310,165 @@ void editarDatos(){ // se necesita mejora
     cout << "Datos actuales: " << endl;
     showData(c);
 
-    cout << "Datos del paciente\n";
-    
-
-    /*if (obtPos(pacientes->id) != -1)
-    {
-        cout << "El id ya está registrado: " << endl;
-        return;
-    }*/
-
-    cout << "Nombres: ";
-    scanf(" %[^\n]", c.nombre);
-    cout << "Apellidos: " << endl;
-    scanf(" %[^\n]", c.apellido);  
-    cout << "Edad: " << endl;
-    cin >> c.edad;
-    //cin.ignore();
-    cout << "Fecha de nacimiento" << endl;
-    cout << "Dia: " << endl;
-    cin >> c.dia;
-    //cin.ignore();
-    cout << "Mes: " << endl;
-    cin >> c.mes;
-    //cin.ignore();
-    cout << "Anio: " << endl;
-    cin >> c.anio;
-    //cin.ignore();
-    cout << "Cedula: " << endl;
-    scanf(" %[^\n]", c.cedula);
-    //cin.ignore();
-    cout << "Genero: " << endl;
-    scanf(" %[^\n]", c.genero);
-    //cin.ignore();
-    /*cout << "¿Desea agregar genero secundario? (1=SI/2=N)" << endl;
-    cin >> opGenSec;
-    //cin.ignore();
-
-    if (opGenSec == 1)
-    {
-        cout << "Genero secundario: " << endl;
-        scanf(" %[^\n]", pacientes->generoSec);
-        //cin.ignore();
-    }
-    else if (opGenSec == 2)
-    {
-        cout << "No se ha agregado genero secundario..." << endl;
-    }
-    else
-    {
-        cout << "Ninguna opcion es valida..." << endl;
-        exit(0);
-    }*/
-
     cout << endl;
-    cout << "Ciudad: " << endl;
-    scanf(" %[^\n]", c.ciudad);
-    //cin.ignore();
-    cout << "Direccion: " << endl;
-    scanf(" %[^\n]", c.direccion);
-    //cin.ignore();
-    cout << "Telefono: " << endl;
-    scanf(" %[^\n]", c.telefono);
-    //cin.ignore();
-    cout << "Correo: " << endl;
-    scanf(" %[^\n]", c.correo);
-    //cin.ignore();
-    cout << "Escriba la relacion que tiene el paciente actualmente: " << endl;
-    cout << "1. Casado" << endl;
-    cout << "2. Soltero" << endl;
-    cout << "3. Divorciado" << endl;
-    scanf(" %[^\n]", c.relacion);
 
-    editar(&c, id);
+    //Menu para editar los datos
+    cout << "Que dato desea editar?" << endl;
+    cout << "1. Nombre" << endl;
+    cout << "2. Apellido" << endl;
+    cout << "3. Edad" << endl;
+    cout << "4. Dia del nacimiento" << endl;
+    cout << "5. Mes del naciemiento" << endl;
+    cout << "6. Anio del nacimiento" << endl;
+    cout << "7. Cedula" << endl;
+    cout << "8. Genero" << endl;
+    cout << "9. Genero Secundario" << endl;
+    cout << "10. Ciudad" << endl;
+    cout << "11. Direccion" << endl;
+    cout << "12. Correo" << endl;
+    cout << "13. Relacion del paciente" << endl;
+    cin >> opE;
+    switch (opE)
+    {
+    case 1:
+        cout << "Ingrese el nuevo nombre: ";
+        cin >> c.nombre;
+        editar(&c, id);
+        break;
+    case 2:
+        cout << "Ingrese el nuevo apellido: ";
+        cin >> c.apellido;
+        editar(&c, id);
+        break;
+    case 3:
+        cout << "Ingrese la nueva edad: ";
+        cin >> c.edad;
+        editar(&c, id);
+        break;
+    case 4:
+        cout << "Ingrese el nuevo dia del nacimiento: ";
+        cin >> c.dia;
+        editar(&c, id);
+        break;
+    case 5:
+        cout << "Ingrese el nuevo mes del nacimiento: ";
+        cin >> c.mes;
+        editar(&c, id);
+        break;
+    case 6:
+        cout << "Ingrese el nuevo anio del nacimiento: ";
+        cin >> c.anio;
+        editar(&c, id);
+        break;
+    case 7:
+        cout << "Ingrese la nueva cedula: ";
+        cin >> c.cedula;
+        editar(&c, id);
+        break;
+    case 8:
+        cout << "Ingrese la nuevo genero: ";
+        cin >> c.genero;
+        editar(&c, id);
+        break;
+    /*case 9:
+        cout << "Ingrese la nuevo genero secundario: ";
+        cin >> c.generoSec;
+        editar(&c, id);
+        break;*/
+
+    case 10:
+        cout << "Ingrese la nueva ciudad: ";
+        cin >> c.ciudad;
+        editar(&c, id);
+        break;
+    case 11:
+        cout << "Ingrese la nueva direccion: ";
+        cin >> c.direccion;
+        editar(&c, id);
+        break;
+    case 12:
+        cout << "Ingrese la nuevo telefono: ";
+        cin >> c.telefono;
+        editar(&c, id);
+        break;
+    case 13:
+        cout << "Ingrese la nuevo correo: ";
+        cin >> c.correo;
+        editar(&c, id);
+        break;
+    case 14:
+        cout << "Ingrese la nueva relacion: ";
+        cin >> c.relacion;
+        editar(&c, id);
+        break;
+
+    default:
+        cout << "Ninguna opcion es correcta";
+        exit(0);
+        break;
+    }
 
     cout << "Registro actualizado" << endl;
 }
 
-// shift+alt+f
+//Archivos
+
+
+
+int cargarPac(){
+    ifstream archivo("Pacientes.txt");
+
+    if(archivo.fail()){
+        return 0;
+    }
+    int i = 0;
+    while(archivo >> pacientes[i].id){
+        archivo.ignore();
+        archivo.getline(pacientes[i].nombre,50);
+        archivo.getline(pacientes[i].apellido,50);
+        archivo>>pacientes[i].edad;
+        archivo>>pacientes[i].dia;
+        archivo>>pacientes[i].mes;
+        archivo>>pacientes[i].anio;
+        archivo.getline(pacientes[i].cedula,16);
+        archivo.getline(pacientes[i].genero,50);
+        //archivo.getline(pacientes[i].generoSec,50);
+        archivo.getline(pacientes[i].ciudad,50);
+        archivo.getline(pacientes[i].direccion,150);
+        archivo.getline(pacientes[i].telefono,13);
+        archivo.getline(pacientes[i].correo,50);
+        archivo.getline(pacientes[i].relacion,50);
+       
+        i++;
+    }
+        archivo.close();
+        return i;
+}
+
+void escribirArchivo(const PERSONAS &person){
+    ofstream archivo;
+
+    archivo.open("Pacientes.txt", ios::app);
+
+    if(archivo.fail()){
+        cout<<"No se pudo abrir el archivo"<<endl;
+        exit(1);
+    }
+
+        archivo << "Id del paciente: "<<  person.id << endl;
+        archivo << "Nombre del paciente: "<< person.nombre << endl;
+        archivo << "Apellido del paciente: "<<person.apellido << endl;
+        archivo << "Edad del paciente: "<<person.edad << endl;
+        archivo << "Dia de nacimiento del paciente: "<< person.dia << endl;
+        archivo << "Mes de nacimiento del paciente: "<< person.mes << endl;
+        archivo << "Año de nacimiento del paciente: "<< person.anio << endl;
+        archivo << "Cedula del paciente: "<< person.cedula << endl;
+        archivo << "Genero del paciente: "<< person.genero << endl;
+        //archivo << person.generoSec << endl;
+        archivo << "Ciudad del paciente: "<< person.ciudad << endl;
+        archivo << "Direccion del paciente: "<< person.direccion << endl;
+        archivo << "Correo del paciente: "<< person.correo << endl;
+        archivo << "Relacion del paciente: "<< person.relacion << endl;
+        
+        archivo.close();
+}
