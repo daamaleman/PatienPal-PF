@@ -50,9 +50,9 @@ void editarcita(CITAS *c, int id)
     {
         strcpy(cita[posi].nombre, c->nombre);
         strcpy(cita[posi].descripcion, c->descripcion);
-        strcpy(cita[posi].fechas, c->fechas);
-        strcpy(cita[posi].hora, c->hora);
-        strcpy(cita[posi].salida, c->salida);
+        strcpy(cita[posi].tiempo.fechas, c->tiempo.fechas);
+        strcpy(cita[posi].tiempo.hora, c->tiempo.hora);
+        strcpy(cita[posi].tiempo.salida, c->tiempo.salida);
         strcpy(cita[posi].doctor, c->doctor);
     }
     else
@@ -102,9 +102,9 @@ void cargarCitas()
         miCitas.ignore(); // Ignorar el salto de línea después del ID
         miCitas.getline(c.nombre, 50);
         miCitas.getline(c.descripcion, 100);
-        miCitas.getline(c.fechas, 20);
-        miCitas.getline(c.hora, 10);
-        miCitas.getline(c.salida, 10);
+        miCitas.getline(c.tiempo.fechas, 20);
+        miCitas.getline(c.tiempo.hora, 10);
+        miCitas.getline(c.tiempo.salida, 10);
         miCitas.getline(c.doctor, 50);
 
         agregarcita(&c);
@@ -165,13 +165,13 @@ void principal()
                 cin.getline(citaeditar.descripcion, 100);
 
                 cout << "Fecha: ";
-                cin.getline(citaeditar.fechas, 20);
+                cin.getline(citaeditar.tiempo.fechas, 20);
 
                 cout << "Hora: ";
-                cin.getline(citaeditar.hora, 10);
+                cin.getline(citaeditar.tiempo.hora, 10);
 
                 cout << "Hora de salida: ";
-                cin.getline(citaeditar.salida, 10);
+                cin.getline(citaeditar.tiempo.salida, 10);
 
                 cout << "Doctor: ";
                 cin.getline(citaeditar.doctor, 50);
@@ -212,11 +212,11 @@ void datospaciente()
     cout << "Descripcion: ";
     cin.getline(nuevaCita.descripcion, 100);
     cout << "Fecha: ";
-    cin.getline(nuevaCita.fechas, 20);
+    cin.getline(nuevaCita.tiempo.fechas, 20);
     cout << "Hora de llegada del paciente: ";
-    cin.getline(nuevaCita.hora, 10);
+    cin.getline(nuevaCita.tiempo.hora, 10);
     cout << "Hora de salida del paciente: ";
-    cin.getline(nuevaCita.salida, 10);
+    cin.getline(nuevaCita.tiempo.salida, 10);
     cout << "Doctor que atendio: ";
     cin.getline(nuevaCita.doctor, 50);
     agregarcita(&nuevaCita);
@@ -232,9 +232,9 @@ void mostrarcitas(int id)
         cout << "|" << "ID del paciente: " << cita[posi].id << endl;
         cout << "|" << "Nombre: " << cita[posi].nombre << endl;
         cout << "|" << "Descripcion: " << cita[posi].descripcion << endl;
-        cout << "|" << "Fecha: " << cita[posi].fechas << endl;
-        cout << "|" << "Hora de llegada del paciente: " << cita[posi].hora << endl;
-        cout << "|" << "Hora de salida del paciente: " << cita[posi].salida << endl;
+        cout << "|" << "Fecha: " << cita[posi].tiempo.fechas << endl;
+        cout << "|" << "Hora de llegada del paciente: " << cita[posi].tiempo.hora << endl;
+        cout << "|" << "Hora de salida del paciente: " << cita[posi].tiempo.salida << endl;
         cout << "|" << "Doctor que atendio: " << cita[posi].doctor << endl;
         cout << "---------------------------------------------" << endl;
     }
