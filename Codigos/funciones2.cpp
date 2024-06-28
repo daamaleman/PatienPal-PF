@@ -9,7 +9,7 @@ CITAS cita[MAX_CITAS];
 int pos = 0;
 
 int obtPos(int id);
-void agregarcitas(CITAS *c);
+void agregarcita(CITAS *c);
 void mostrarcitas(int id);
 void eliminarcita(int id);
 void editarcita(CITAS *c, int id);
@@ -122,7 +122,8 @@ int menu()
     cout << "2. Eliminar cita \n";
     cout << "3. Editar cita \n";
     cout << "4. Mostrar citas \n";
-    cout << "5. Salir \n";
+    cout << "5. Cargar citas \n";
+    cout << "6. Salir \n";
     cout << "Ingrese una opcion: ";
     cin >> op;
 
@@ -187,17 +188,21 @@ void principal()
                 break;
             }
             case 5:
+                cargarCitas();
+                break;
+            case 6:
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
                 cout << "Opcion incorrecta, por favor ingrese una opcion valida\n";
                 break;
         }
-    } while (op !=5);
+    } while (op != 6);
 }
 
 void datospaciente()
 {
+    ofstream citas("citas.txt", ios::app);
     CITAS nuevaCita;
     cout << "Datos del paciente\n";  
     cout << "ID: ";
@@ -216,35 +221,32 @@ void datospaciente()
     cout << "Doctor que atendio: ";
     cin.getline(nuevaCita.doctor, 50);
     agregarcita(&nuevaCita);
-    cout << "Paciente agregado con exito\n";
+    citas << "ID: " << nuevaCita.id << "\n";
+    citas << "Nombre: " <<  nuevaCita.nombre << "\n";
+    citas << "Descripcion: " << nuevaCita.descripcion << "\n";
+    citas << "Hora de entrada del paciente: " << nuevaCita.tiempo.hora << "\n";
+    citas << "Hora de salida del paciente: " << nuevaCita.tiempo.salida << "\n";
+    citas << "Doctor que atendio: " << nuevaCita.doctor << "\n";
+    cout << "Paciente agregado con exito \n";
 }
 
 void mostrarcitas(int id)
 {
-    ofstream archivoSalida("citas_mostradas.txt", ios::app); // Abrir el archivo en modo añadir
-    if (!archivoSalida)
-    {
-        cout << "No se pudo abrir el archivo para escritura" << endl;
-        return;
-    }
-
     int posi = obtPos(id);
     if (posi != -1)
     {   
-        archivoSalida << "--------------------------------------------" << endl;
-        archivoSalida << "|" << "ID del paciente: " << cita[posi].id << endl;
-        archivoSalida << "|" << "Nombre: " << cita[posi].nombre << endl;
-        archivoSalida << "|" << "Descripcion: " << cita[posi].descripcion << endl;
-        archivoSalida << "|" << "Fecha: " << cita[posi].tiempo.fechas << endl;
-        archivoSalida << "|" << "Hora de llegada del paciente: " << cita[posi].tiempo.hora << endl;
-        archivoSalida << "|" << "Hora de salida del paciente: " << cita[posi].tiempo.salida << endl;
-        archivoSalida << "|" << "Doctor que atendio: " << cita[posi].doctor << endl;
-        archivoSalida << "---------------------------------------------" << endl;
+        cout << "--------------------------------------------" << endl;
+        cout << "|" << "ID del paciente: " << cita[posi].id << endl;
+        cout << "|" << "Nombre: " << cita[posi].nombre << endl;
+        cout << "|" << "Descripcion: " << cita[posi].descripcion << endl;
+        cout << "|" << "Fecha: " << cita[posi].tiempo.fechas << endl;
+        cout << "|" << "Hora de llegada del paciente: " << cita[posi].tiempo.hora << endl;
+        cout << "|" << "Hora de salida del paciente: " << cita[posi].tiempo.salida << endl;
+        cout << "|" << "Doctor que atendio: " << cita[posi].doctor << endl;
+        cout << "---------------------------------------------" << endl;
     }
     else
     {
-        archivoSalida << "Cita no encontrada." << endl;
+        cout << "Cita no encontrada." << endl;
     }
-
-    archivoSalida.close();
 }
