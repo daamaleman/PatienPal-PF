@@ -1,42 +1,42 @@
 Proceso registroNuevoPaciente
-	Definir nombre, apellido,cedula, genero, generoSec, cuidad, direccion, telefono, correo, relacion Como Caracter;
+	Definir nombre, apellido, cedula, genero, generoSec, Cuidad, direccion, telefono, correo, relacion Como Cadena;
 	Definir edad, dia, mes, anio, opGenSec, opRelacion Como Entero;
-	Escribir "Datos del paciente";
-	Escribir "Nombre: ";
+	Escribir 'Datos del paciente';
+	Escribir 'Nombre: ';
 	Leer nombre;
-	Escribir "Apellido: ";
+	Escribir 'Apellido: ';
 	Leer apellido;
-	Escribir "Edad: ";
+	Escribir 'Edad: ';
 	Leer edad;
-	Escribir "Numero de Cedula: ";
+	Escribir 'Numero de Cedula: ';
 	Leer cedula;
-	Escribir "Fecha de nacimiento";
-	Escribir "Dia: ";
+	Escribir 'Fecha de nacimiento';
+	Escribir 'Dia: ';
 	Leer dia;
-	Escribir "Mes :";
+	Escribir 'Mes :';
 	Leer mes;
-	Escribir "Anio :";
+	Escribir 'Anio :';
 	Leer anio;
-	Escribir "Genero: ";
+	Escribir 'Genero: ';
 	Leer genero;
-	Escribir "¿Desea agregar genero secundario? (1=S/2=N)";
+	Escribir '¿Desea agregar genero secundario? (1=S/2=N)';
 	Leer opGenSec;
 	Segun opGenSec Hacer
 		1:
-			Escribir "Agrege genero secundario: ";
+			Escribir 'Agrege genero secundario: ';
 			Leer generoSec;
 		2:
-			Escribir "No se agregó genero secundario...";
+			Escribir 'No se agregó genero secundario...';
 	FinSegun
-	Escribir "Cuidad: ";
+	Escribir 'Cuidad: ';
 	Leer Cuidad;
-	Escribir "Direccion: ";
+	Escribir 'Direccion: ';
 	Leer direccion;
-	Escribir "Telefono: ";
+	Escribir 'Telefono: ';
 	Leer telefono;
-	Escribir "Correo: ";
+	Escribir 'Correo: ';
 	Leer correo;
-	Escribir "Relacion actual (Casado, Soltero, Divorciado) ";
+	Escribir 'Relacion actual (Casado, Soltero, Divorciado) ';
 	Leer relacion;
-	Escribir "Paciente registrado exitosamente...";
+	Escribir 'Paciente registrado exitosamente...';
 FinProceso
