@@ -9,7 +9,7 @@ typedef struct PERSONAS
 {
     char nombre[100];
     char apellido[100];
-    char cedula[16];
+    char cedula[20];
     char genero;
     char generoSec;
     char ciudad[100];

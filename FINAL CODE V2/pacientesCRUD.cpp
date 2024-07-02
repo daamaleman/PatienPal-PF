@@ -209,7 +209,7 @@ void pedirDatos()
     cin >> paciente.anio;
     cout << "Cedula: ";
     cin >> ws;
-    cin.getline(paciente.cedula, 16);
+    cin.getline(paciente.cedula, 20);
     bool bandera = true;
     do
     {
@@ -312,7 +312,7 @@ void editarDatos()
     case 7:
         cout << "Nueva cedula: ";
         cin >> ws;
-        cin.getline(c.cedula, 16);
+        cin.getline(c.cedula, 20);
         break;
     case 8:
         cout << "Nuevo genero: ";
