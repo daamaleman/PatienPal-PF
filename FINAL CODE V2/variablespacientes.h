@@ -11,7 +11,7 @@ typedef struct PERSONAS
     char apellido[100];
     char cedula[20];
     char genero;
-    char generoSec;
+    char generoSec = '-';
     char ciudad[100];
     char direccion[150];
     char telefono[13];

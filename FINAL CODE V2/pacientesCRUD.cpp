@@ -76,7 +76,6 @@ void editar(PERSONAS *c, int id)
     {
         strcpy(pacientes[posi].nombre, c->nombre);
         strcpy(pacientes[posi].apellido, c->apellido);
-        pacientes[posi].edad = c->edad;
         pacientes[posi].dia = c->dia;
         pacientes[posi].mes = c->mes;
         pacientes[posi].anio = c->anio;
@@ -156,7 +155,6 @@ void showData(PERSONAS &c)
     cout << "El ID del paciente es: " << c.id << endl;
     cout << "El nombre del paciente es: " << c.nombre << endl;
     cout << "El apellido del paciente es: " << c.apellido << endl;
-    cout << "La edad del paciente es: " << c.edad << endl;
     cout << endl;
     cout << "Fecha de nacimiento" << endl;
     cout << "Dia: " << c.dia << endl;
@@ -198,8 +196,6 @@ void pedirDatos()
     cin.getline(paciente.nombre, 50);
     cout << "Apellido: ";
     cin.getline(paciente.apellido, 50);
-    cout << "Edad: ";
-    cin >> paciente.edad;
     cout << "Fecha de nacimiento\n";
     cout << "Dia: ";
     cin >> paciente.dia;
@@ -225,8 +221,18 @@ void pedirDatos()
             bandera = true;
         }
     } while (!bandera);
-    cout << "Genero secundario: ";
-    cin >> paciente.generoSec;
+    cout << "Desea agregar un genero secundario?(1= S / 2= N): ";
+    cin >> opGenSec;
+    cin.ignore();
+    if (opGenSec == 1)
+    {
+        cout << "Ingrese el genero secundario: ";
+        cin >> paciente.generoSec;
+    }
+    else
+    {
+        cout << "No se ha agregado genero secundario" << endl;
+    }
     cout << "Ciudad: ";
     cin >> ws;
     cin.getline(paciente.ciudad, 50);
@@ -263,21 +269,20 @@ void editarDatos()
     showData(c);
     cout << endl;
     // Menu para editar los datos
-    cout << "¿Qué dato desea editar?" << endl;
+    cout << "Â¿QuÃ© dato desea editar?" << endl;
     cout << "1. Nombre" << endl;
     cout << "2. Apellido" << endl;
-    cout << "3. Edad" << endl;
-    cout << "4. Dia del nacimiento" << endl;
-    cout << "5. Mes del nacimiento" << endl;
-    cout << "6. Anio del nacimiento" << endl;
-    cout << "7. Cedula" << endl;
-    cout << "8. Genero" << endl;
-    cout << "9. Genero Secundario" << endl;
-    cout << "10. Ciudad" << endl;
-    cout << "11. Direccion" << endl;
-    cout << "12. Telefono" << endl;
-    cout << "13. Correo" << endl;
-    cout << "14. Relacion del paciente" << endl;
+    cout << "3. Dia del nacimiento" << endl;
+    cout << "4. Mes del nacimiento" << endl;
+    cout << "5. Anio del nacimiento" << endl;
+    cout << "6. Cedula" << endl;
+    cout << "7. Genero" << endl;
+    cout << "8. Genero Secundario" << endl;
+    cout << "9. Ciudad" << endl;
+    cout << "10. Direccion" << endl;
+    cout << "11. Telefono" << endl;
+    cout << "12. Correo" << endl;
+    cout << "13. Relacion del paciente" << endl;
     cout << "Ingrese alguna de las opciones: " << endl;
     cin >> opE;
 
@@ -294,55 +299,51 @@ void editarDatos()
         cin.getline(c.apellido, 50);
         break;
     case 3:
-        cout << "Nueva edad: ";
-        cin >> c.edad;
-        break;
-    case 4:
         cout << "Nuevo dia de nacimiento: ";
         cin >> c.dia;
         break;
-    case 5:
+    case 4:
         cout << "Nuevo mes de nacimiento: ";
         cin >> c.mes;
         break;
-    case 6:
+    case 5:
         cout << "Nuevo anio de nacimiento: ";
         cin >> c.anio;
         break;
-    case 7:
+    case 6:
         cout << "Nueva cedula: ";
         cin >> ws;
         cin.getline(c.cedula, 20);
         break;
-    case 8:
+    case 7:
         cout << "Nuevo genero: ";
         cin >> c.genero;
         break;
-    case 9:
+    case 8:
         cout << "Nuevo genero secundario: ";
         cin >> c.generoSec;
         break;
-    case 10:
+    case 9:
         cout << "Nueva ciudad: ";
         cin >> ws;
         cin.getline(c.ciudad, 50);
         break;
-    case 11:
+    case 10:
         cout << "Nueva direccion: ";
         cin >> ws;
         cin.getline(c.direccion, 150);
         break;
-    case 12:
+    case 11:
         cout << "Nuevo telefono: ";
         cin >> ws;
         cin.getline(c.telefono, 13);
         break;
-    case 13:
+    case 12:
         cout << "Nuevo correo: ";
         cin >> ws;
         cin.getline(c.correo, 50);
         break;
-    case 14:
+    case 13:
         cout << "Nueva relacion civil: ";
         cin >> ws;
         cin.getline(c.relacion, 50);
@@ -368,7 +369,6 @@ void escribirArchivo(const PERSONAS &person)
     archivo << "Id del paciente: " << person.id << endl;
     archivo << "Nombre del paciente: " << person.nombre << endl;
     archivo << "Apellido del paciente: " << person.apellido << endl;
-    archivo << "Edad del paciente: " << person.edad << endl;
     archivo << "Dia de nacimiento del paciente: " << person.dia << endl;
     archivo << "Mes de nacimiento del paciente: " << person.mes << endl;
     archivo << "Anio de nacimiento del paciente: " << person.anio << endl;
@@ -401,7 +401,6 @@ void leerArchivo(PERSONAS pacientes[], int &cantidad)
         if (linea.find("Id del paciente: ") == 0)
         {
             pacientes[cantidad].id = stoi(linea.substr(17));
-            // cout << pacientes[cantidad].id << endl;
 
             getline(archivo, linea);
             strcpy(pacientes[cantidad].nombre, linea.substr(21).c_str());
@@ -410,20 +409,13 @@ void leerArchivo(PERSONAS pacientes[], int &cantidad)
             strcpy(pacientes[cantidad].apellido, linea.substr(23).c_str());
 
             getline(archivo, linea);
-            pacientes[cantidad].edad = stoi(linea.substr(19));
-            // cout << pacientes[cantidad].edad << endl;
-
-            getline(archivo, linea);
             pacientes[cantidad].dia = stoi(linea.substr(32));
-            // cout << pacientes[cantidad].dia << endl;
 
             getline(archivo, linea);
             pacientes[cantidad].mes = stoi(linea.substr(32));
-            // cout << pacientes[cantidad].mes << endl;
 
             getline(archivo, linea);
             pacientes[cantidad].anio = stoi(linea.substr(32));
-            // cout << pacientes[cantidad].anio << endl;
 
             getline(archivo, linea);
             strcpy(pacientes[cantidad].cedula, linea.substr(21).c_str());
@@ -452,9 +444,6 @@ void leerArchivo(PERSONAS pacientes[], int &cantidad)
             cantidad++;
         }
     }
-
-    // std::cout<<"Cantidad de pacientes: "<<pos;
-
     archivo.close();
 }
 

@@ -1,0 +1,14 @@
+Id del paciente: 2
+Nombre del paciente: Diedereich
+Apellido del paciente: Aleman
+Dia de nacimiento del paciente: 31
+Mes de nacimiento del paciente: 12
+Anio de nacimiento del paciente: 2006
+Cedula del paciente: 001
+Genero del paciente: M
+Genero Secundario del paciente: B
+Ciudad del paciente: Masatepe
+Direccion del paciente: jkdgbs
+Telefono del paciente: 986363
+Correo del paciente: kj;gd
+Relacion del paciente: 2

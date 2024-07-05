@@ -10,7 +10,6 @@ struct HORARIOS
     char salida[10];
 };
 
-
 struct CITAS 
 {
     int id;

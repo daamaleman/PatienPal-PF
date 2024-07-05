@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include "variablescitas.h"
+
 using namespace std;
 
 CITAS cita[MAX_CITAS];
