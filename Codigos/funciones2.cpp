@@ -221,13 +221,14 @@ void datospaciente()
     cout << "Doctor que atendio: ";
     cin.getline(nuevaCita.doctor, 50);
     agregarcita(&nuevaCita);
-    citas << "ID: " << nuevaCita.id << "\n";
-    citas << "Nombre: " <<  nuevaCita.nombre << "\n";
-    citas << "Descripcion: " << nuevaCita.descripcion << "\n";
-    citas << "Hora de entrada del paciente: " << nuevaCita.tiempo.hora << "\n";
-    citas << "Hora de salida del paciente: " << nuevaCita.tiempo.salida << "\n";
-    citas << "Doctor que atendio: " << nuevaCita.doctor << "\n";
-    cout << "Paciente agregado con exito \n";
+    citas << "|" << "ID: " << nuevaCita.id << "\n";
+    citas << "|" << "Nombre: " <<  nuevaCita.nombre << "\n";
+    citas << "|" << "Tratamiento: " << nuevaCita.descripcion << "\n";
+    citas << "|" << "Hora de entrada del paciente: " << nuevaCita.tiempo.hora << "\n";
+    citas << "|" << "Hora de salida del paciente: " << nuevaCita.tiempo.salida << "\n";
+    citas << "|" << "Doctor: " << nuevaCita.doctor << "\n";
+    cout <<  "|" << "Paciente agregado con exito \n";
+    system("cls");
 }
 
 void mostrarcitas(int id)
