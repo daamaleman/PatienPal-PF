@@ -1,14 +1,28 @@
-Id del paciente: 2
+Id del paciente: 1
 Nombre del paciente: Diedereich
 Apellido del paciente: Aleman
 Dia de nacimiento del paciente: 31
 Mes de nacimiento del paciente: 12
 Anio de nacimiento del paciente: 2006
+Cedula del paciente: 001-311206-1002U
+Genero del paciente: M
+Genero Secundario del paciente: -
+Ciudad del paciente: San Marcos
+Direccion del paciente: 
+Telefono del paciente: 
+Correo del paciente: 
+Relacion del paciente: 
+Id del paciente: 2
+Nombre del paciente: Juanito
+Apellido del paciente: Perez
+Dia de nacimiento del paciente: 12
+Mes de nacimiento del paciente: 3
+Anio de nacimiento del paciente: 2007
 Cedula del paciente: 001
 Genero del paciente: M
-Genero Secundario del paciente: B
+Genero Secundario del paciente: -
 Ciudad del paciente: Masatepe
-Direccion del paciente: jkdgbs
-Telefono del paciente: 986363
-Correo del paciente: kj;gd
-Relacion del paciente: 2
+Direccion del paciente: jdjdjd
+Telefono del paciente: 132374432
+Correo del paciente: iudcbpbf
+Relacion del paciente: 1

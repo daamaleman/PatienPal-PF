@@ -26,6 +26,7 @@ void pedirDatos();
 void mostrarDatos();
 void showData(PERSONAS &c);
 void editarDatos();
+void editarTodo();
 
 // Manejo de archivos
 void escribirArchivo(const PERSONAS &person);
@@ -269,7 +270,7 @@ void editarDatos()
     showData(c);
     cout << endl;
     // Menu para editar los datos
-    cout << "Â¿QuÃ© dato desea editar?" << endl;
+    cout << "Que datos desea editar?" << endl;
     cout << "1. Nombre" << endl;
     cout << "2. Apellido" << endl;
     cout << "3. Dia del nacimiento" << endl;
@@ -283,6 +284,7 @@ void editarDatos()
     cout << "11. Telefono" << endl;
     cout << "12. Correo" << endl;
     cout << "13. Relacion del paciente" << endl;
+    cout << "14. Editar todos los datos" << endl;
     cout << "Ingrese alguna de las opciones: " << endl;
     cin >> opE;
 
@@ -348,6 +350,10 @@ void editarDatos()
         cin >> ws;
         cin.getline(c.relacion, 50);
         break;
+    case 14:
+        cout << "Editar Todos los Datos" << endl;
+        editarTodo();
+
     default:
         cout << "Opcion no valida" << endl;
         return;
@@ -463,4 +469,80 @@ void saveAll()
     }
 
     archivo.close();
+}
+
+void editarTodo()
+{
+    int id;
+    int op;
+    cout << "Escribe el ID del paciente a editar: " << endl;
+    cin >> id;
+    if (obtPos(id) == -1)
+    {
+        cout << "No se encontro registro: " << endl;
+        return;
+    }
+    PERSONAS c = buscar(id);
+    cout << "Datos actuales: " << endl;
+    showData(c);
+    cout << endl;
+    cout << "Nombre: ";
+    cin >> ws;
+    cin.getline(c.nombre, 50);
+    cout << "Apellido: ";
+    cin.getline(c.apellido, 50);
+    cout << "Fecha de nacimiento\n";
+    cout << "Dia: ";
+    cin >> c.dia;
+    cout << "Mes: ";
+    cin >> c.mes;
+    cout << "Anio: ";
+    cin >> c.anio;
+    cout << "Cedula: ";
+    cin >> ws;
+    cin.getline(c.cedula, 20);
+    bool bandera = true;
+    do
+    {
+        cout << "Genero (M/F): ";
+        cin >> c.genero;
+        if (c.genero != 'M' && c.genero != 'm' && c.genero != 'F' && c.genero != 'f')
+        {
+            cout << "Opcion incorrecta, intente de nuevo..." << endl;
+            bandera = false;
+        }
+        else
+        {
+            bandera = true;
+        }
+    } while (!bandera);
+    cout << "Desea agregar un genero secundario?(1= S / 2= N): ";
+    cin >> op;
+    cin.ignore();
+    if (op == 1)
+    {
+        cout << "Ingrese el genero secundario: ";
+        cin >> c.generoSec;
+    }
+    else
+    {
+        cout << "No se ha agregado genero secundario" << endl;
+    }
+    cout << "Ciudad: ";
+    cin >> ws;
+    cin.getline(c.ciudad, 50);
+    cout << "Direccion: ";
+    cin.getline(c.direccion, 150);
+    cout << "Telefono: ";
+    cin.getline(c.telefono, 13);
+    cout << "Correo: ";
+    cin.getline(c.correo, 50);
+    cout << "Escriba la relacion que tiene el paciente actualmente: " << endl;
+    cout << "1. Casado" << endl;
+    cout << "2. Soltero" << endl;
+    cout << "3. Divorciado" << endl;
+    cin.getline(c.relacion, 50);
+    editar(&c, id);
+    cout << "Datos actualizados correctamente" << endl;
+    saveAll();
 }
